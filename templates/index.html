@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/blueprint/screen.css')}}" type="text/css" media="screen, projection">
+    	<link rel="stylesheet" href="{{url_for('static', filename='css/blueprint/print.css')}}" type="text/css" media="print">	
+    	<!--[if lt IE 8]><link rel="stylesheet" href="{{url_for('static', filename='css/blueprint/ie.css')}}" type="text/css" media="screen, projection"><![endif]-->
+    	<link rel="stylesheet" href="{{url_for('static', filename='css/smoothness/jquery-ui-1.8.16.custom.css')}}" type="text/css">
+    	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.6.3.min.js')}}"></script>
+    	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-ui-1.8.16.custom.min.js')}}"></script>
+
+    	<script type="text/javascript">
+    		var ticket = "{{ticket}}";
+    		$(function(){
+		    	$("button.upvote").button({
+	    			icons: {
+	    				primary: "ui-icon-arrowthick-1-n"
+	    			},
+	    			text: "false"
+    			});
+    			$("button.downvote").button({
+	    			icons: {
+	    				primary: "ui-icon-arrowthick-1-s"
+	    			},
+	    			text: "false"
+    			});
+
+    			{% for vote in votes %}
+    				$("div#" + {{vote.talk_id}}).children("a." + "{{vote.direction}}").children("button").first().addClass('selected');
+    				$("div#" + {{vote.talk_id}}).children("a." + "{{vote.direction}}").children("button").first().children('span').first().addClass('selected');
+    				$("div#" + {{vote.talk_id}}).children("a." + "{{vote.direction}}").click(function(e){e.stopPropagation(); return false});	
+    			{% endfor %}
+
+    			$("button.selected").button('disable');
+    			
+    		});
+    	</script>
+
+    	<style>
+    		button.vote {
+    			width: 17px;
+    			height: 17px;
+    			float: left;
+    		}
+    		button.vote > span {
+    			left: 0em !important;
+    		}
+    		button.vote > span.selected {
+    			background-image: url({{url_for('static', filename='css/smoothness/images/ui-icons_f68023_256x240.png')}}) !important;
+    		}
+    	</style>
+
+		<title>CWRU Hacker Society Talk Survey</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="span-24 last">
+				<h1>CWRU Hackers Talks</h1>
+				<h4>Reddit-Style Voting for CWRU Hackers Talks</h3>
+				{% for talk in talks %}
+				<div style="clear: both" id="{{talk.key().id()}}">
+					<a href="/vote/{{talk.key().id()}}/up" class='up'><button class='vote upvote'></button></a>
+					<a href="/vote/{{talk.key().id()}}/down" class='down'><button class='vote downvote'></button></a>
+					<p style='margin-left: .5em; float: left'><strong>{{talk.name}}</strong> by {{talk.speaker}}</p>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="span-24 last">
+				<p class="small">Hastily thrown together by <a href="http://www.fredhatfull.com">Fred Hatfull</a>. Spew complains to fxh32@case.edu.</p>
+		</div>
+
+	</body>
+</html>

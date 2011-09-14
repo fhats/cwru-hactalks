@@ -1,0 +1,11 @@
+application: cwru-hactalks
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /.*
+  script: cwru_hactalks.py
+
+builtins:
+- appstats: on

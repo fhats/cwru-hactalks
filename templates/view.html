@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/blueprint/screen.css')}}" type="text/css" media="screen, projection">
+    	<link rel="stylesheet" href="{{url_for('static', filename='css/blueprint/print.css')}}" type="text/css" media="print">	
+    	<!--[if lt IE 8]><link rel="stylesheet" href="{{url_for('static', filename='css/blueprint/ie.css')}}" type="text/css" media="screen, projection"><![endif]-->
+    	<link rel="stylesheet" href="{{url_for('static', filename='css/smoothness/jquery-ui-1.8.16.custom.css')}}" type="text/css">
+    	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.6.3.min.js')}}"></script>
+    	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-ui-1.8.16.custom.min.js')}}"></script>
+
+		<title>CWRU Hacker Society Talk Survey</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="span-24 last">
+				<h1>CWRU Hackers Talks</h1>
+				<h4>Reddit-Style Voting for CWRU Hackers Talks</h3>
+				{% for talk in talks %}
+				    <div style="clear:both">
+                    <p style='float: left'><span style="color: rgb({{ -(talk.votes*215)//max_votes }}, {{(talk.votes*215)//max_votes}}, 0)">{{talk.votes}}</span></p><p style='margin-left: 1em; float: left'><strong>{{talk.name}}</strong> by {{talk.speaker}}</p>
+                    </div>
+				{% endfor %}
+			</div>
+			<div class="span-24 last">
+				<p class="small">Hastily thrown together by <a href="http://www.fredhatfull.com">Fred Hatfull</a>. Spew complains to fxh32@case.edu.</p>
+		</div>
+
+	</body>
+</html>

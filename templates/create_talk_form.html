@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/blueprint/screen.css')}}" type="text/css" media="screen, projection">
+    	<link rel="stylesheet" href="{{url_for('static', filename='css/blueprint/print.css')}}" type="text/css" media="print">	
+    	<!--[if lt IE 8]><link rel="stylesheet" href="{{url_for('static', filename='css/blueprint/ie.css')}}" type="text/css" media="screen, projection"><![endif]-->
+    	<title>Add Talk</title>
+    </head>
+    <body>
+    	<form action="{{url_for('create_talk')}}" method="POST">
+	    	<label for="talk">Talk Name</label>
+	    	<input type="text" name="name">
+	    	<label for="speaker">Speaker</label>
+	    	<input type="text" name="speaker">
+	    	<input type="submit" name="Submit" value="Submit"></input>
+    	</form>
+    </body>
+</html>
